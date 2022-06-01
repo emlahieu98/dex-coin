@@ -1,0 +1,20 @@
+import styled from 'styled-components/macro';
+import { Link as RouterLink } from 'react-router-dom';
+
+const Link = styled(RouterLink)`
+  /* color: ${p => p.theme.primary}; */
+  text-decoration: none;
+  .ant-menu-item-selected & {
+    pointer-events: none;
+  }
+  &:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+`;
+
+export default Link;

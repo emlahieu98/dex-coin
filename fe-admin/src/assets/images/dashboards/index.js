@@ -1,0 +1,17 @@
+export { default as contact } from './contact.svg';
+export { default as support } from './support.svg';
+export { default as newOrder } from './new-order.svg';
+export { default as processOrder } from './process-order.svg';
+export { default as doneOrder } from './done-order.svg';
+export { default as failOrder } from './fail-order.svg';
+export { default as totalDeposit } from './total-recharge.svg';
+export { default as totalWithdrawal } from './total-withdrawal.svg';
+export { default as boxCheck } from './box-check.svg';
+export { default as tooltip } from './tooltip.svg';
+export { default as wallet } from './wallet.svg';
+export { default as people } from './people.svg';
+export { default as ConnectStore } from './connect-store.svg';
+export { default as SearchProduct } from './search-product.svg';
+export { default as SellProduct } from './sell-product.svg';
+export { default as totalMoney } from './total_money.svg';
+export { default as totalOrder } from './total_order.svg';

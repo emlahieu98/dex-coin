@@ -1,0 +1,43 @@
+stages:
+  - build
+  - deploy
+
+deploy-dev:
+  stage: deploy
+  image: node:14-alpine
+  before_script:
+    - apk add openssh-client rsync bash
+  script:
+    - echo "Start building App"
+    - yarn install
+    - cat .env.develop > .env
+    - CI=false yarn run build || { exit 1;}
+    - echo "Build successfully!"
+  after_script:
+    - eval $(ssh-agent -s)
+    - bash -c "ssh-add <(echo '$KEY')"
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -avz --no-perms --no-owner --no-group --delete build/ root@deploy.odii.xyz:/var/www/admin.odii.xyz/htdocs/
+  artifacts:
+    expire_in: 3 days
+    paths:
+      - build
+  only:
+    - develop
+
+deploy-prod:
+  stage: deploy
+  image: node:14-alpine
+  before_script:
+    - apk add openssh-client rsync bash
+  script:
+    - echo "Start building App"
+    - yarn install
+    - cat .env.production > .env
+    - CI=false yarn run build || { exit 1;}
+    - echo "Build successfully!"
+  after_script:
+    - eval $(ssh-agent -s)
+    - bash -c "ssh-add <(echo '$KEY')"
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -avz --no-perms --no-owner --no-group --delete build/ root@deploy.odii.xyz:/var/www/admin.odii.vn/
+  only:
+    - main
